@@ -6,7 +6,7 @@ from . import models
 
 @admin.register(models.Product)
 class ProdukctAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'manufacturer', 'price', 'slug',
+    list_display = ('title', 'category', 'kind', 'manufacturer', 'price', 'slug',
                     'publish', 'status')
     list_filter = ('category', 'created', 'publish', 'status')
     search_fields = ('title', 'body', 'manufacturer')

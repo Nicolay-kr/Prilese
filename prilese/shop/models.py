@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.shortcuts import reverse
 
 
 # Create your models here.
@@ -28,3 +29,13 @@ class Product(models.Model):
     category = models.CharField(max_length=20,
                                 choices=CATEGORY_TYPES,
                                 default='unknown')
+    image = models.ImageField(upload_to="product/%Y/%m/%d/", blank=True)
+    kind = models.CharField(max_length=250, blank=True)
+
+    def get_absolut_url(self):
+        pass
+
+
+
+    def __str__(self):
+        return self.title
