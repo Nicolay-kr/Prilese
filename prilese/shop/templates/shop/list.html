@@ -1,0 +1,26 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="row " style="height:600px;">
+        {% for good in goods %}
+
+        <div class="col-3 border bg-light >
+            {% if good.status == 'public' %}
+
+                <div class="card" style="width: 12rem;">
+                  <img src="{{ good.image }}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ good.title }}</h5>
+                    <p class="card-text">{{ good.body|truncatewords:15 }}</p>
+                    <a href="#" class="btn btn-primary">Купить</a>
+                  </div>
+
+        </div>
+            {% endif %}
+        {% endfor %}
+     </div>
+
+{% endblock %}
