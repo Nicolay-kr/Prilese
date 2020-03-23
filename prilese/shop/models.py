@@ -29,13 +29,32 @@ class Product(models.Model):
     category = models.CharField(max_length=20,
                                 choices=CATEGORY_TYPES,
                                 default='unknown')
-    image = models.ImageField(upload_to="product/%Y/%m/%d/", blank=True)
-    kind = models.CharField(max_length=250, blank=True)
+    image = models.ImageField(upload_to="product", blank=True)
+    subcategory = models.ForeignKey('Subcategory',
+                                    on_delete=models.CASCADE,null=True,
+                                    blank=True, related_name='product')
 
     def get_absolut_url(self):
         pass
 
 
+
+    def __str__(self):
+        return self.title
+
+class Subcategory(models.Model):
+    CATEGORY_TYPES = (
+        ('garden', 'Garden goods'),
+        ('auto', 'Auto goods'),
+        ('build', 'Building goods'),
+        ('unknown', 'Unknown goods')
+    )
+
+    title = models.CharField(max_length=250)
+    slug = models.SlugField(max_length=250, unique=True)
+    category = models.CharField(max_length=20,
+                                choices=CATEGORY_TYPES,
+                                default='unknown')
 
     def __str__(self):
         return self.title

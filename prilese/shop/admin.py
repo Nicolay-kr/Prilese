@@ -6,10 +6,15 @@ from . import models
 
 @admin.register(models.Product)
 class ProdukctAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'kind', 'manufacturer', 'price', 'slug',
+    list_display = ('title', 'category', 'subcategory', 'manufacturer', 'price', 'slug',
                     'publish', 'status')
     list_filter = ('category', 'created', 'publish', 'status')
     search_fields = ('title', 'body', 'manufacturer')
     prepopulated_fields = {'slug': ('title',)}
     date_hierarchy = 'publish'
     ordering = ('publish',)
+
+@admin.register(models.Subcategory)
+class SubcategoryAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug', 'category')
+    prepopulated_fields = {'slug': ('title',)}

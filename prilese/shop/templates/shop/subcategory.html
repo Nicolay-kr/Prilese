@@ -1,0 +1,11 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <h1> Goods</h1>
+    {% for good in goods %}
+        <a href=" {% url 'shop:subcategory_url' slug=good.slug category=good.category %}"><p>{{ good.title }}</p>
+    {% endfor %}
+{% endblock %}

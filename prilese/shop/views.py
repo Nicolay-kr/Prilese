@@ -9,11 +9,13 @@ def index(request):
     return render(request, 'shop/index.html')
 
 
-def category_of_kinds(request, category):
-    list_of_kinds = models.Product.objects.filter(category=category)
+def subcategory(request, category):
+    list_of_subcategory = models.Subcategory.objects.filter(category=category)
 
-    return render(request, 'shop/category.html', context={"goods": list_of_kinds})
+    return render(request, 'shop/subcategory.html', context={"goods": list_of_subcategory})
 
-def kind_of_good(request,kind,category):
-    list_of_goods = models.Product.objects.filter(kind=kind)
-    return render(request, 'shop/list.html', context={"goods": list_of_goods})
+def list_of_products(request,slug,category):
+    subcategory = models.Subcategory.objects.get(slug=slug)
+    products = models.Product.objects.filter(subcategory=subcategory)
+
+    return render(request, 'shop/list.html', context=locals())

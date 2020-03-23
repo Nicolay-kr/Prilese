@@ -4,23 +4,42 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row " style="height:600px;">
-        {% for good in goods %}
+<div class="container  bg-light ">
+    <div>
+        <h2>{{subcategory.title}} </h2>
+    </div>
+    <div class="row" >
+        {% for product in products %}
+            <div class="col-3  p-3 border bg-light">
 
-        <div class="col-3 border bg-light >
-            {% if good.status == 'public' %}
+                {% if product.status == 'public' %}
+                    <div class="product-item m-1">
+                        <div><a href="{% url "shop:index_url" %}">
+                        <div>
+                            <img src="{{ product.image.url }}" class="card-img" alt="...">
+                        </div>
+                            <h4 class="text-center">{{product.title}}</h4>
+                            <p class="text-left-break">
+                                {{ product.body|truncatewords:15 }}
+                            </p>
+                        <div>
+                            <h4 class="text-center">{{product.price}} BYN</h4>
+                        </div>
+                        </div>
 
-                <div class="card" style="width: 12rem;">
-                  <img src="{{ good.image }}" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">{{ good.title }}</h5>
-                    <p class="card-text">{{ good.body|truncatewords:15 }}</p>
-                    <a href="#" class="btn btn-primary">Купить</a>
-                  </div>
-
-        </div>
-            {% endif %}
+                        <div class="btn">
+                            <button type="button" class="btn btn-primary">Добавить в корзину</button>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
         {% endfor %}
-     </div>
-
+    </div>
+</div>
 {% endblock %}
+<div class="container-fluid my-5 bg-light ">
+    <dif class="row mb-3 ">
+        <dif class="col mx-2 border bg-light shadow p-3   bg-dark" style=" height: 20rem;">
+        </dif>
+    </dif>
+    </dif>
