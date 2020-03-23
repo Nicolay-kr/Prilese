@@ -17,7 +17,7 @@ class Product(models.Model):
     )
     title = models.CharField(max_length=250)
     manufacturer = models.CharField(max_length=250, blank=True)
-    slug = models.SlugField(max_length=250, unique=True)
+    slug_product = models.SlugField(max_length=250, unique=True)
     body = models.TextField(blank=True)
     publish = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
@@ -51,7 +51,7 @@ class Subcategory(models.Model):
     )
 
     title = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250, unique=True)
+    slug_subcategory = models.SlugField(max_length=250, unique=True)
     category = models.CharField(max_length=20,
                                 choices=CATEGORY_TYPES,
                                 default='unknown')

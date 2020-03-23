@@ -5,4 +5,36 @@
 
 {% block content %}
 
+<div class="container  bg-light ">
+    <div class="row" style="height : 100px" >
+        <div class="col align-self-center">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'shop:index_url' %}">Главная</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'shop:subcategory_url' slug_subcategory=product.subcategory.slug_subcategory category=product.category %}">{{product.subcategory.title}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{product.title}}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row" align-item-center style="height : 550px" >
+        <div class="col-3 mx-5 align-self-start" >
+            <div>
+                <img src="{{ product.image.url }}" class="card-img" alt="..." class="img-thumbnail">
+            </div>
+            <div style="margin: 20px">
+                <h3 class ="text-center">{{product.price}} BYN</h3>
+            </div>
+        </div>
+        <div class="col-6 mx-5 align-self-start" >
+            <div>
+                <h2 class ="text-center">{{product.title}}</h2>
+                <p>{{product.body}}</p>
+                <div class="btn">
+                    <button type="button" class="btn btn-primary">Добавить в корзину</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -14,7 +14,7 @@
 
                 {% if product.status == 'public' %}
                     <div class="product-item m-1">
-                        <div><a href="{% url "shop:index_url" %}">
+                        <div><a href="{% url 'shop:product_url' category=product.category slug_subcategory=subcategory.slug_subcategory  slug_product=product.slug_product%}">
                         <div>
                             <img src="{{ product.image.url }}" class="card-img" alt="...">
                         </div>

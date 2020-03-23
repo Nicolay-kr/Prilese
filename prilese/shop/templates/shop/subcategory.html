@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block content %}
-    <h1> Goods</h1>
-    {% for good in goods %}
-        <a href=" {% url 'shop:subcategory_url' slug=good.slug category=good.category %}"><p>{{ good.title }}</p>
+    <h1> Категории товаров </h1>
+    {% for product in products %}
+        <a href=" {% url 'shop:subcategory_url' slug_subcategory=product.slug_subcategory category=product.category %}"><p>{{ product.title }}</p>
     {% endfor %}
 {% endblock %}
