@@ -8,27 +8,33 @@
     <div>
         <h2>{{subcategory.title}} </h2>
     </div>
-    <div class="row" >
+    <div class="row text-dark" >
         {% for product in products %}
             <div class="col-3  p-3 border bg-light">
 
                 {% if product.status == 'public' %}
-                    <div class="product-item m-1">
-                        <div><a href="{% url 'shop:product_url' category=product.category slug_subcategory=subcategory.slug_subcategory  slug_product=product.slug_product%}">
+                    <div class="product-item m-1 ">
                         <div>
-                            <img src="{{ product.image.url }}" class="card-img" alt="...">
-                        </div>
-                            <h4 class="text-center">{{product.title}}</h4>
-                            <p class="text-left-break">
-                                {{ product.body|truncatewords:15 }}
-                            </p>
-                        <div>
-                            <h4 class="text-center">{{product.price}} BYN</h4>
-                        </div>
+                            <a href="{% url 'shop:product_url' category=subcategory.category slug_subcategory=subcategory.slug_subcategory  slug_product=product.slug_product%}">
+                            <div>
+                                <img src="{{ product.image.url }}" class="card-img" alt="...">
+                            </div>
+                                <h4 class="text-center">{{product.title}}</h4>
+                                <p class="text-left-break">
+                                    {{ product.body|truncatewords:15 }}
+                                </p>
+                            <div>
+                                <h4 class="text-center">{{product.price}} BYN</h4>
+                            </div>
                         </div>
 
-                        <div class="btn">
-                            <button type="button" class="btn btn-primary">Добавить в корзину</button>
+                        <div class="row justify-content-md-center">
+                            {% if product.quantity  %}
+                                <a class="btn btn-primary" href="{% url 'shop:cart_add_url' slug_product=product.slug_product %}" role="button">Добавить в корзину</a>
+                            {% else  %}
+                                <p>Товара нет в наличии</p>
+
+                            {% endif  %}
                         </div>
                     </div>
                 {% endif %}
@@ -37,9 +43,3 @@
     </div>
 </div>
 {% endblock %}
-<div class="container-fluid my-5 bg-light ">
-    <dif class="row mb-3 ">
-        <dif class="col mx-2 border bg-light shadow p-3   bg-dark" style=" height: 20rem;">
-        </dif>
-    </dif>
-    </dif>

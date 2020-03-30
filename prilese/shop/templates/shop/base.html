@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet"  href="{% static 'shop/style.css' %}">
+    <link rel="stylesheet" href="{% static 'shop/style.css' %}">
     <title>
         {% block title %}
         {% endblock %}
@@ -23,48 +24,130 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 
-<!--    <div class="container">-->
-<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark ">
-    <a class="navbar-brand" href="{% url "shop:index_url" %}">Prilese</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark ">
+        <a class="navbar-brand" href="{% url 'shop:index_url' %}">Prilesie</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="/admin" tabindex="-1" aria-disabled="true">Admin</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
-</nav>
-<div class="container-fluid"></div>
-    <div class="container-fluid my-2 bg-light ">
-        {% block content %}
-        There is not any content
-        {% endblock %}
-    </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
 
-    <div class="container-fluid my-5 bg-light ">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'shop:category_url' category='build' %}">Строительные товары</a>
+                </li>
 
-        <dif class="row mb-3 ">
-            <dif class="col mx-2 border bg-light shadow p-3   bg-dark" style=" height: 20rem;">
-            </dif>
-        </dif>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'shop:category_url' category='garden' %}">Товары для сада</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'shop:category_url' category='auto' %}">Автотовары</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'shop:delivery_url'%}">Оплата и доставка</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'shop:contact_url'%}">Контакты</a>
+                </li>
+                {% if user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link " href="/admin" tabindex="-1" aria-disabled="true">Admin</a>
+                </li>
+                {% else %}
+                {% endif %}
+            </ul>
+
+            <form class="form-inline px-5" action="{% url 'shop:search_url'%}" method="get">
+                <input class="form-control mr-sm-2" name="q" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success mr-5 my-sm-0" type="submit">Search</button>
+                <a class="btn btn-light" href="{% url 'shop:cart_url' %}" role="button">Kорзина</a>
+            </form>
+
+        </div>
+    </nav>
+
+    <div class="row justify-content-end bg-light pt-1" style="height:50px;">
+        <div class="col-2">
+            <ul class="nav">
+                {% if user.is_authenticated%}
+                <li class="nav-item">
+                    <a class="nav-link active text-secondary" href="{% url 'profile' %}">Profile</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active text-secondary" href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link active text-secondary" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="{% url 'register' %}">Register</a>
+                </li>
+                {% endif %}
+
+            </ul>
+
+        </div>
     </div>
 </div>
+<div class="container-fluid"></div>
 
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags }}">
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="container-fluid mb-2 bg-light ">
+    {% block content %}
+    There is not any content
+    {% endblock %}
+</div>
+<div class="container-fluid mb-2 bg-light ">
+    <div class="row my-3 bg-dark justify-content-center">
+        <div class="col-4  p-5">
+            <p class="text-white-50">
+                220075, г. Минск, пер. Промышленный, 12А/1, комн. 36 Дата регистрации в Торговом реестре Республики
+                Беларусь: 29.08.2016 г.
+                Свидетельство № 695, от 20.06.2000 г.
+                УНП 100005713
+            </p>
+        </div>
+
+        <div class="col-4 p-5 ">
+            <div class="row justify-content-md-center">
+                <div>
+                    <ul>
+                        <li><a class="text-white-50" href="{% url 'shop:delivery_url'%}">Оплата и доставка</a></li>
+                        <li><a class="text-white-50" href="{% url 'shop:contact_url'%}">Контакты</a></li>
+                        <li><a class="text-white-50" href="{% url 'shop:category_url' category='garden' %}">Товары для
+                                сада</a></li>
+                        <li><a class="text-white-50" href="{% url 'shop:category_url' category='build' %}">Строительные
+                                товары</a></li>
+
+                        <li><a class="text-white-50" href="{% url 'shop:category_url' category='auto' %}">Авто товары</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 p-5">
+            <h3 class="text text-white-50"> 536-45-00</h3>
+            <p class="text text-white-50">
+                Velcom, Life, МТС
+                Пн–сб: 8:00–21:00
+                вс: 8:00–18:30
+            </p>
+
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

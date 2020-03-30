@@ -4,8 +4,18 @@
 {% endblock %}
 
 {% block content %}
-    <h1> Категории товаров </h1>
-    {% for product in products %}
-        <a href=" {% url 'shop:subcategory_url' slug_subcategory=product.slug_subcategory category=product.category %}"><p>{{ product.title }}</p>
-    {% endfor %}
+<div class="row bg-light ml-5" style="height: 400px;">
+     <div class="col ">
+        <div>
+            <h1> Категории товаров: </h1>
+            {% for subcategory in subcategories %}
+                <a href=" {% url 'shop:subcategory_url' slug_subcategory=subcategory.slug_subcategory category=subcategory.category %}">
+                    <p class="text-success">{{ subcategory.title }}</p></a>
+            {% endfor %}
+        </div>
+         <div class="col"></div>
+         <div class="col"></div>
+
+    </div>
+</div>
 {% endblock %}

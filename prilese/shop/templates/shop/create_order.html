@@ -1,0 +1,12 @@
+{% extends 'shop/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'shop:order_url' %}" method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-primary">Подтвердить заказ</button>
+    </form>
+{% endblock %}

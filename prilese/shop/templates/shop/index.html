@@ -4,44 +4,55 @@
 {% endblock %}
 
 {% block content %}
-<h1>Три блока</h1>
-<div class="row " style="height:500px;">
-  <div class="col mx-2 border bg-light shadow p-3 bg-white rounded text-primary" style="background-size: cover">
-    <div class="card" style="object-fit: cover;">
-      <a href="{% url "shop:category_url" category="garden" %}">
-        <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gardening-1521662873.jpg"
-        class="card-img-top" alt="..."style="object-fit: fill">
-        <div class=" card-body">
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-            card's content.</p>
-          </div>
-        </div>
-      </div>
+<div class="row " style="height:600px;">
 
-
-      <div class="col mx-2 border bg-light shadow p-3 bg-white rounded">
+    <div class="col mx-2 border bg-light shadow p-3 bg-white rounded">
         <div class="card" style="object-fit: fill">
-          <a href="{% url "shop:category_url" category="build" %}"><img
-            src="https://ontiverosmasonry.net/files/bigstock/2017/07/Bricklayer-Worker-Installing-B-141056804-768x513.jpg"
-            class="card-img-top" alt="..." style="object-fit: fill">
+            <a href="{% url 'shop:category_url' category='build' %}">
+                <img src="https://avatars.mds.yandex.net/get-zen_doc/1101166/pub_5c44f3ab4d404000adabbb11_5c44fcc786e43c00ad24ab47/scale_1200"
+                class="card-img-top" alt="..." style=" height: 280px">
             <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's content.</p>
-              </div>
+                <h6 class="text-secondary">ТОВАРЫ ДЛЯ СТРОИТЕЛЬСТВА И РЕМОНТА</h6>
+                <p class="text-secondary">
+                    Среди наших товаров вы найдете не только традиционные материалы. Наш онлайн-каталог - это отличный вариант,
+                    чтобы выбрать все необходимые материалы максимально быстро, просто и дешево!
+                </p>
+            </a>
             </div>
-          </div>
-          <div class="col mx-2 border bg-light shadow p-3  bg-white rounded alight-item-center">
-            <div class="card" style="object-fit: fill">
-              <a href="{% url "shop:category_url" category="auto" %}"><img
-                src="https://i.pinimg.com/originals/b1/e3/16/b1e3163c091f88cece1ac356900b430b.jpg"
-                class="card-img-top" alt="..."style="object-fit: fill">
-                <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                card's content.</p>
-              </div>
-              </div>
+        </div>
+    </div>
+
+    <div class="col mx-2 border bg-light shadow p-3 bg-white rounded text-primary">
+        <div class="card" style="object-fit: cover;">
+            <a href="{% url 'shop:category_url' category='garden' %}">
+            <img src="https://new-retail.ru/upload/iblock/763/7633ff029dd0576803ca2c454fad012c.jpg"
+                 class="card-img-top" alt="..." style=" height: 280px">
+            <div class=" card-body">
+                <h6 class="text-secondary">ТОВАРЫ ДЛЯ ВАШЕГО САДА</h6>
+                <p class="text-secondary">
+                Широчайший ассортимент товаров для сада и огорода: лестницы, теплицы, шланги, тяпки, лопаты, грабли, семена, грунт, опрыскиватели и многое другое.
+                    Их использование сделает ваш труд более удобным! </p>
+            </a>
             </div>
-          </div>
+        </div>
+    </div>
+
+    <div class="col mx-2 border bg-light shadow p-3  bg-white rounded alight-item-center">
+        <div class="card" style="object-fit: fill">
+            <a href="{% url 'shop:category_url' category='auto' %}">
+                <img src="https://i.pinimg.com/564x/d8/74/43/d87443366791a41d433033acf7e3b7f4.jpg"
+                class="card-img-top" alt="..." style=" height: 280px">
+            <div class="card-body">
+                <h6 class="text-secondary">ТОВАРЫ ДЛЯ ВАШЕГО АВТОМОБИЛЯ</h6>
+                <p class="text-secondary">
+
+                Большой ассортимент автозапчастей от проверенных поставщиков. Работаем только с сертифицированной продукцией
+                от проверенных отечественных и зарубежных производителей. </p>
+            </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}

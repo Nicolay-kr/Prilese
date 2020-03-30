@@ -1,0 +1,43 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+{% if not products %}
+    <h3>По Вашему запросу ничего не найдено</h3>
+{% else %}
+    <div class="container  bg-light ">
+        <div>
+            <h2>{{subcategory.title}} </h2>
+        </div>
+        <div class="row" >
+            {% for product in products %}
+                <div class="col-3  p-3 border bg-light">
+
+                    {% if product.status == 'public' %}
+                        <div class="product-item m-1">
+                            <div><a href="{% url 'shop:product_url' category=product.subcategory.category slug_subcategory=product.subcategory.slug_subcategory  slug_product=product.slug_product%}">
+                            <div>
+                                <img src="{{ product.image.url }}" class="card-img" alt="...">
+                            </div>
+                                <h4 class="text-center">{{product.title}}</h4>
+                                <p class="text-left-break">
+                                    {{ product.body|truncatewords:15 }}
+                                </p>
+                            <div>
+                                <h4 class="text-center">{{product.price}} BYN</h4>
+                            </div>
+                            </div>
+
+                            <div class="row justify-content-md-center">
+                                <a class="btn btn-primary" href="{% url 'shop:cart_add_url' slug_product=product.slug_product %}" role="button">Добавить в корзину</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

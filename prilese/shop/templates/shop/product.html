@@ -4,14 +4,13 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="container  bg-light ">
     <div class="row" style="height : 100px" >
         <div class="col align-self-center">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{% url 'shop:index_url' %}">Главная</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'shop:subcategory_url' slug_subcategory=product.subcategory.slug_subcategory category=product.category %}">{{product.subcategory.title}}</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'shop:subcategory_url' slug_subcategory=product.subcategory.slug_subcategory category=product.subcategory.category %}">{{product.subcategory.title}}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{product.title}}</li>
                 </ol>
             </nav>
@@ -25,14 +24,26 @@
             <div style="margin: 20px">
                 <h3 class ="text-center">{{product.price}} BYN</h3>
             </div>
+            <div style="margin: 20px">
+                {% if product.quantity %}
+                    <p class="text-success text-center ">Товар есть в наличии</p>
+                {% else %}
+                    <p class="text-danger text-center">Товара нет в наличии</p>
+                {% endif %}
+
+            </div>
         </div>
         <div class="col-6 mx-5 align-self-start" >
             <div>
                 <h2 class ="text-center">{{product.title}}</h2>
                 <p>{{product.body}}</p>
-                <div class="btn">
-                    <button type="button" class="btn btn-primary">Добавить в корзину</button>
-                </div>
+                {% if product.quantity  %}
+                    <div class="btn">
+                        <a class="btn btn-primary" href="{% url 'shop:cart_add_url' slug_product=product.slug_product %}" role="button">Добавить в корзину</a>
+                    </div>
+                {% else %}
+                    <p class=" text-start text-danger ">Товара нет в наличии</p>
+                {% endif %}
             </div>
         </div>
     </div>
